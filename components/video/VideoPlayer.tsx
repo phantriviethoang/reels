@@ -9,7 +9,7 @@ export default function VideoPlayer({ video }: { video: Video }) {
     const videoRef = useRef<HTMLVideoElement | null>(null);
 
     const [isPlaying, setIsPlaying] = useState(false);
-    const [isMuted, setIsMuted] = useState(false);
+    const [isMuted, setIsMuted] = useState(true);
     const [isLike, setIsLike] = useState(false);
     const [likesCount, setLikesCount] = useState(video.likesCount);
     const [showIcon, setShowIcon] = useState(false);
@@ -74,7 +74,7 @@ export default function VideoPlayer({ video }: { video: Video }) {
     return (
         <section ref={sectionRef} className="h-screen w-screen bg-black flex items-center justify-center snap-start">
             <div className="relative h-full w-full max-w-150 aspect-9/16">
-                <video ref={videoRef} onClick={toggle} src={video.videoUrl} className="h-full w-full object-cover" playsInline loop muted={isMuted} />
+                <video ref={videoRef} onClick={toggle} src={video.videoUrl} className="h-full w-full object-cover" playsInline autoPlay loop muted={isMuted} />
 
                 <button onClick={toggleMute} className="absolute top-15 right-4 bg-black/50 p-2 rounded-full text-white md:top-3">
                     {isMuted ? <VolumeX size={18} /> : <Volume2 size={18} />}
