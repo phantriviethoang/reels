@@ -1,4 +1,4 @@
-## INFO
+## Giải thích ngắn gọn cách xử lý logic Play/Pause khi cuộn trang
 
 Dùng useEffect vì cuộn trang là một side effect — tức là một tác động xảy ra bên ngoài React.
 
