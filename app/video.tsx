@@ -69,14 +69,10 @@ export default function VideoPage({ video }: { video: Video }) {
 	// LIKE TOGGLE (FIXED)
 	// ===============================
 	const toggleLike = (e: React.MouseEvent) => {
-		e.stopPropagation(); // 🔥 CHẶN CLICK LAN RA VIDEO
-
-		setIsLike((prev) => {
-			setLikesCount((count) => count + (prev ? -1 : 1));
-			return !prev;
-		});
+		e.stopPropagation();
+		setIsLike(!isLike);
+		setLikesCount(likesCount + (isLike ? -1 : 1));
 	};
-
 	// ===============================
 	// UI
 	// ===============================
