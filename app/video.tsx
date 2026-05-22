@@ -105,7 +105,7 @@ export default function VideoPage({ video }: { video: Video }) {
 
 				{showIcon && (
 					<div className="absolute inset-0 flex items-center justify-center pointer-events-none">
-						<div className="text-white text-6xl bg-black/40 rounded-full p-6">
+						<div className="text-white text-4xl bg-black/40 rounded-full w-24 h-24 flex items-center justify-center">
 							{isPlaying ? "⏸" : "▶"}
 						</div>
 					</div>
