@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 
 type Video = {
 	id: number;
@@ -10,12 +10,12 @@ type Video = {
 	likesCount: number;
 };
 
-interface VideoPageProps {
-	video: Video;
-}
-
-export default function VideoPage({ video }: VideoPageProps) {
+export default function VideoPage({ video }: { video: Video }) {
+	const sectionRef = useRef<HTMLDivElement | null>(null);
 	const videoRef = useRef<HTMLVideoElement | null>(null);
+
+	const [isPlaying, setIsPlaying] = useState(false);
+	const [showIcon, setShowIcon] = useState(false);
 
 	useEffect(() => {
 		const observer = new IntersectionObserver(
@@ -24,29 +24,47 @@ export default function VideoPage({ video }: VideoPageProps) {
 
 				if (entry.isIntersecting) {
 					videoRef.current.play();
+					setIsPlaying(true);
 				} else {
 					videoRef.current.pause();
+					setIsPlaying(false);
 				}
 			},
-			{
-				threshold: 0.6,
-			},
+			{ threshold: 0.7 },
 		);
 
-		if (videoRef.current) {
-			observer.observe(videoRef.current);
+		if (sectionRef.current) {
+			observer.observe(sectionRef.current);
 		}
 
-		return () => {
-			observer.disconnect();
-		};
+		return () => observer.disconnect();
 	}, []);
 
+	const toggle = () => {
+		if (!videoRef.current) return;
+
+		if (videoRef.current.paused) {
+			videoRef.current.play();
+			setIsPlaying(true);
+		} else {
+			videoRef.current.pause();
+			setIsPlaying(false);
+		}
+
+		// show icon tạm thời
+		setShowIcon(true);
+		setTimeout(() => setShowIcon(false), 700);
+	};
+
 	return (
-		<section className="h-screen snap-start flex items-center justify-center bg-black">
+		<section
+			ref={sectionRef}
+			className="h-screen snap-start flex items-center justify-center bg-black"
+		>
 			<div className="relative h-full aspect-9/16">
 				<video
 					ref={videoRef}
+					onClick={toggle}
 					src={video.videoUrl}
 					className="h-full w-full object-cover"
 					playsInline
@@ -54,11 +72,17 @@ export default function VideoPage({ video }: VideoPageProps) {
 					muted
 				/>
 
-				<div className="absolute inset-0">
-					<div className="absolute bottom-20 left-4 text-white z-10">
-						<h1>{video.authorName}</h1>
-						<p>{video.description}</p>
+				{showIcon && (
+					<div className="absolute inset-0 flex items-center justify-center pointer-events-none">
+						<div className="text-white text-6xl bg-black/40 rounded-full m-2 p-6">
+							{isPlaying ? "⏸" : "▶"}
+						</div>
 					</div>
+				)}
+
+				<div className="absolute bottom-20 left-4 text-white z-10 pointer-events-none">
+					<h1>{video.authorName}</h1>
+					<p>{video.description}</p>
 				</div>
 			</div>
 		</section>
