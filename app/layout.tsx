@@ -27,17 +27,53 @@ export default function RootLayout({
 			lang="en"
 			className={`${geistSans.variable} ${geistMono.variable} h-full antialiased no-scrollbar`}
 		>
-			<body className="relative h-screen overflow-hidden">
-				<aside className=" absolute bottom-0 left-0 right-0 h-15 bg-zinc-900 text-white p-4 z-10 md:top-0 md:bottom-auto md:right-auto md:h-full md:w-50">
-					<div className=" h-full flex flex-row justify-around items-center md:flex-col md:justify-center md:gap-5">
+			<body className="relative h-screen overflow-hidden bg-black">
+				<aside
+					className="
+                    absolute
+                    bottom-0
+                    left-0
+                    right-0
+                    h-16
+                    bg-zinc-900
+                    text-white
+                    z-20
+
+                    md:top-0
+                    md:bottom-auto
+                    md:right-auto
+                    md:h-full
+                    md:w-52"
+				>
+					<div
+						className="
+                        h-full
+                        flex
+                        flex-row
+                        justify-around
+                        items-center
+
+                        md:flex-col
+                        md:justify-center
+                        md:gap-5"
+					>
 						<button className="btn">home</button>
-						<button className="btn">home</button>
-						<button className="btn">home</button>
+						<button className="btn">search</button>
+						<button className="btn">profile</button>
 					</div>
 				</aside>
 
-				<main className="h-full flex justify-center">
-					<div className="">{children}</div>
+				<main className="h-full flex items-center justify-center">
+					<div
+						className="
+                        h-full
+                        w-full
+
+                        md:w-auto
+                        md:aspect-9/16 "
+					>
+						{children}
+					</div>
 				</main>
 			</body>
 		</html>

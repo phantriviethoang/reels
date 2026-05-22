@@ -1,11 +1,15 @@
 import VideoPage from "./video";
+import { data } from "@/lib/data";
 
-export default function Home() {
+export default function Page() {
 	return (
-		<div className=" h-screen overflow-y-scroll snap-y snap-mandatory ">
-			<VideoPage />
-			<VideoPage />
-			<VideoPage />
+		<div className=" h-screen snap-y snap-mandatory overflow-y-scroll no-scrollbar">
+			{data.map((video) => (
+				<VideoPage
+					key={video.id}
+					video={video}
+				/>
+			))}
 		</div>
 	);
 }
