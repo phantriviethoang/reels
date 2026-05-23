@@ -32,7 +32,7 @@ const items = [
 
 export default function Aside() {
     return (
-        <aside className="absolute bottom-0 right-0 w-full md:top-0 md:bottom-auto md:right-auto md:h-full md:w-20 lg:w-52 text-white z-20 flex md:flex-col justify-around md:justify-center md:gap-8 py-2 lg:items-center">
+        <aside className="fixed inset-x-0 bottom-0 z-20 flex w-full justify-around py-2 pb-[env(safe-area-inset-bottom)] text-white md:inset-y-0 md:left-0 md:right-auto mb-2 md:w-20 md:flex-col md:justify-center md:gap-8 lg:w-52 lg:items-center">
             <div className="hidden md:flex items-center justify-center gap-2 lg:w-32 lg:justify-start mx-auto pt-4">
                 <Image src="/tiktok.png" width={35} height={35} alt="tiktok logo" />
                 <span className="text-lg font-bold hidden lg:inline">TikTok</span>
